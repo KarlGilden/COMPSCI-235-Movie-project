@@ -1,6 +1,7 @@
 from domainmodel.director import Director
 from domainmodel.genre import Genre
 from domainmodel.actor import Actor
+from domainmodel.subtitle import Subtitle
 from typing import List, Iterable
 
 
@@ -19,6 +20,7 @@ class Movie:
 
         self.__actors = list()
         self.__genres = list()
+        self.__subtitles = list()
         self.__director = None
         self.__description = None
         self.__runtime_minutes = 0
@@ -52,6 +54,10 @@ class Movie:
     def genres(self):
         return self.__genres
 
+    @property
+    def subtitles(self):
+        return self.__subtitles
+
     @title.setter
     def title(self, title):
         self.__title = title
@@ -83,6 +89,10 @@ class Movie:
     @genres.setter
     def genres(self, genres):
         self.__genres = genres
+
+    @subtitles.setter
+    def subtitles(self, subs):
+        self.__subtitles = subs
     
     def __repr__(self):
         return f"<Movie {self.__title}, {self.__release_year}>"
@@ -99,16 +109,24 @@ class Movie:
     def __hash__(self):
         return hash((self.__title, self.__release_year))
 
-    def add_actor(self, actor):
+    def add_actor(self, actor: Actor):
         self.__actors.append(actor)
 
-    def remove_actor(self, actor):
+    def remove_actor(self, actor: Actor):
         if actor in self.__actors:
             self.__actors.remove(actor)
 
-    def add_genre(self, genre):
+    def add_genre(self, genre: Genre):
         self.__genres.append(genre)
 
-    def remove_genre(self, genre):
+    def remove_genre(self, genre: Genre):
         if genre in self.__genres:
             self.__genres.remove(genre)
+
+    def add_subtitle(self, subtitle: Subtitle):
+        
+        self.__subtitles.append(subtitle)
+
+    def remove_subtitle(self, subtitle: Subtitle):
+        if subtitle in self.__subtitles:
+            self.__subtitles.remove(subtitle)

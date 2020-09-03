@@ -3,6 +3,7 @@ import csv
 from domainmodel.movie import Movie
 from domainmodel.actor import Actor
 from domainmodel.genre import Genre
+from domainmodel.subtitle import Subtitle
 from domainmodel.director import Director
 
 class MovieFileCSVReader:
@@ -13,6 +14,7 @@ class MovieFileCSVReader:
         self._dataset_of_actors = set()
         self._dataset_of_directors = set()
         self._dataset_of_genres = set()
+        self._dataset_of_subtitles = set()
 
     def read_csv_file(self):
         with open(self.__file_name, mode='r', encoding='utf-8-sig') as csvfile:
@@ -32,6 +34,12 @@ class MovieFileCSVReader:
 
                 actors_str = row['Actors']
                 actors = actors_str.split(',')
+
+                subtitles_str = row['Subtitles']
+                if subtitles_str is None:
+                    subtitles = ''
+                else:
+                    subtitles = subtitles_str.split(',')
                
 
 
@@ -41,6 +49,9 @@ class MovieFileCSVReader:
 
                 for g in genres:
                     self._dataset_of_genres.add(Genre(g))
+                
+                for s in subtitles:
+                    self._dataset_of_subtitles.add(Subtitle(s, None))
 
                 if movie not in self._dataset_of_movies:
                     self._dataset_of_movies.append(movie)

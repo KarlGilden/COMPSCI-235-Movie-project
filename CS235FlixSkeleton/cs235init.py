@@ -4,6 +4,7 @@ from domainmodel.genre import Genre
 from domainmodel.actor import Actor
 from domainmodel.director import Director
 from domainmodel.watchlist import WatchList
+from domainmodel.subtitle import Subtitle
 from flask import Flask, render_template
 import csv
 
@@ -13,6 +14,9 @@ app = Flask(__name__)
 filename = 'Data1000Movies.csv'
 movie_file_reader = MovieFileCSVReader(filename)
 movie_file_reader.read_csv_file()
+
+print(movie_file_reader._dataset_of_subtitles)
+
 
 @app.route('/')
 def index():
