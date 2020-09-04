@@ -124,8 +124,11 @@ class Movie:
             self.__genres.remove(genre)
 
     def add_subtitle(self, subtitle: Subtitle):
-        
-        self.__subtitles.append(subtitle)
+        if subtitle in self.__subtitles:
+            self.__subtitles.remove(subtitle)
+            self.__subtitles.append(subtitle)
+        else:
+            self.__subtitles.append(subtitle)
 
     def remove_subtitle(self, subtitle: Subtitle):
         if subtitle in self.__subtitles:

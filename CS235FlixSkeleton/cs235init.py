@@ -15,8 +15,12 @@ filename = 'Data1000Movies.csv'
 movie_file_reader = MovieFileCSVReader(filename)
 movie_file_reader.read_csv_file()
 
-print(movie_file_reader._dataset_of_subtitles)
-
+movie = Movie("Jaws", 1999)
+english_sub = Subtitle("english", "hello")
+movie.add_subtitle(english_sub)
+english_sub = Subtitle("english", "good morning")
+movie.add_subtitle(english_sub)
+print(movie.subtitles[0]._transcript)
 
 @app.route('/')
 def index():

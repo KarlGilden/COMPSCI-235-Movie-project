@@ -77,6 +77,10 @@ class MovieFileCSVReader:
     def dataset_of_genres(self):
         return self._dataset_of_genres
 
+    @property
+    def dataset_of_subtitles(self)
+        return self._dataset_of_subtitles
+        
     @dataset_of_movies.setter
     def dataset_of_movies(self, movies):
         self._dataset_of_movies = movies
@@ -92,5 +96,9 @@ class MovieFileCSVReader:
     @dataset_of_genres.setter
     def dataset_of_genres(self, genres):
         self._dataset_of_genres = genres
+
+    @dataset_of_subtitles.setter
+    def dataset_of_subtitles(self, subs):
+        self._dataset_of_subtitles = subs
 
     
