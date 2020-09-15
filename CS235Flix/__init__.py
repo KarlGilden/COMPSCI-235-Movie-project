@@ -9,7 +9,12 @@ def create_app(test_config=None):
     data_path = os.path.join('CS235Flix', 'datafiles')
     repo.repo_instance = MemoryRepository()
     populate(data_path, repo.repo_instance)
-    @app.route('/')
-    def index():
-        return render_template('index.html', repo=repo.repo_instance)
+    with app.app_context():
+        # Register blueprints.
+        from .home import home
+        app.register_blueprint(home.home_blueprint)
+
+        from .movies import movies
+        app.register_blueprint(movies.movies_blueprint)
+
     return app
