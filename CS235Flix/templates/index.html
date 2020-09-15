@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<nav class="menu">
+    <h1 class="title">CS235Flix</h1>
+    <div>
+        <p>Login</p>
+        <p>Sign-up</p>
+    </div>
+</nav>
+
+<div class="movies">
+    
+    {% for movie in repo.get_movies_by_actor('Chris Pratt') %}
+        <div class="movie">
+            <div class="movie-img"></div>
+            <p class="movie-name">{{ movie.title }} &lt;{{ movie.release_year }}&gt;</p>
+        </div>
+        
+    {% endfor %}
+
+</div>
+
+{% endblock %}
