@@ -227,3 +227,14 @@ ul{
 .review-footer p{
     font-size: 0.75em;
 }
+
+.custom-select select{
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+
+
+}
+.custom-select select option{
+    color: #111;
+}

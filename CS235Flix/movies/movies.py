@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, Flask, request, url_for, session, redirect
 import CS235Flix.adapters.repository as repo
 from flask_wtf import FlaskForm
-from wtforms import StringField, HiddenField, TextAreaField, SubmitField
+from wtforms import StringField, HiddenField, TextAreaField, SubmitField, SelectField
 import CS235Flix.utilities.utils as utilities 
 import CS235Flix.movies.services as services
 from CS235Flix.authentication.authentication import login_required
@@ -56,15 +56,9 @@ def add_review():
     if form.is_submitted():
         print(movie_id)
         movie = services.get_movie_by_id(movie_id, repo.repo_instance)
-        services.create_review(movie, form.review.data, 10, username)
+        services.create_review(movie, form.review.data, form.rating.data, username)
         url = url_for('movies_bp.view_movie', movie_id=movie_id)
         return redirect(url) 
-
-    if request.method == 'GET':
-        movie_id = int(request.args.get('movie_id'))
-        form.movie_id.data = movie_id
-    else:
-        movie_id = form.movie_id.data
 
     return render_template(
         'new_review.html',
@@ -80,4 +74,5 @@ class SearchForm(FlaskForm):
 class ReviewForm(FlaskForm):
     review = TextAreaField('review', _name='review', render_kw={"placeholder": "Write your review here..."})
     movie_id = HiddenField('movie_id')
+    rating = SelectField('rating', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], coerce=int)
     submit = SubmitField('Submit')
