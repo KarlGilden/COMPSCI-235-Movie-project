@@ -54,14 +54,6 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def add_subtitle(self, subtitle:Subtitle):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_subtitle(self, subtitle:Subtitle):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def get_number_of_movies(self):
         raise NotImplementedError
 

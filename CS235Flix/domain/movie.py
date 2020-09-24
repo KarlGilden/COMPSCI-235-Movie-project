@@ -1,7 +1,4 @@
-from .director import Director
-from .genre import Genre
-from .actor import Actor
-from .subtitle import Subtitle
+from datetime import datetime
 from typing import List, Iterable
 
 
@@ -21,10 +18,13 @@ class Movie:
         self.__actors = list()
         self.__genres = list()
         self.__subtitles = list()
+        self.__reviews = list()
         self.__director = None
         self.__description = None
         self.__rating = 0
         self.__runtime_minutes = 0
+        self.__id = 0
+        self.__description = str()
 
 
     @property
@@ -52,6 +52,10 @@ class Movie:
         return self.__rating
 
     @property
+    def id(self) -> int:
+        return self.__id
+
+    @property
     def actors(self):
         return self.__actors
     
@@ -62,6 +66,10 @@ class Movie:
     @property
     def subtitles(self):
         return self.__subtitles
+
+    @property
+    def reviews(self):
+        return self.__reviews
 
     @title.setter
     def title(self, title):
@@ -93,6 +101,13 @@ class Movie:
             raise ValueError("Must be positive")
         self.__rating = rating
 
+    @id.setter
+    def id(self, id):
+        if id <= 0:
+            raise ValueError("Must be positive")
+        self.__id = id
+
+
     @actors.setter
     def actors(self, actors):
         self.__actors = actors
@@ -104,6 +119,10 @@ class Movie:
     @subtitles.setter
     def subtitles(self, subs):
         self.__subtitles = subs
+
+    @reviews.setter
+    def reviews(self, reviews):
+        self.__reviews = reviews
     
     def __repr__(self):
         return f"<Movie {self.__title}, {self.__release_year}>"
@@ -120,27 +139,31 @@ class Movie:
     def __hash__(self):
         return hash((self.__title, self.__release_year))
 
-    def add_actor(self, actor: Actor):
+    def add_actor(self, actor):
         self.__actors.append(actor)
 
-    def remove_actor(self, actor: Actor):
+    def remove_actor(self, actor):
         if actor in self.__actors:
             self.__actors.remove(actor)
 
-    def add_genre(self, genre: Genre):
+    def add_genre(self, genre):
         self.__genres.append(genre)
 
-    def remove_genre(self, genre: Genre):
+    def remove_genre(self, genre):
         if genre in self.__genres:
             self.__genres.remove(genre)
 
-    def add_subtitle(self, subtitle: Subtitle):
+    def add_subtitle(self, subtitle):
         if subtitle in self.__subtitles:
             self.__subtitles.remove(subtitle)
             self.__subtitles.append(subtitle)
         else:
             self.__subtitles.append(subtitle)
 
-    def remove_subtitle(self, subtitle: Subtitle):
+    def remove_subtitle(self, subtitle):
         if subtitle in self.__subtitles:
             self.__subtitles.remove(subtitle)
+
+    def add_review(self, review):
+        if review not in self.__reviews:
+            self.__reviews.append(review)

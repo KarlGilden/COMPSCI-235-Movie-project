@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Review for {{ movie.title }}, {{ movie.release_year }} </h1>
+<form class="form" method="POST">
+    {{ form.movie }}
+    {{form.csrf_token}}
+    <div class="form">
+        {{ form.review(class_="form-control") }}
+    </div>
+    {{ form.submit }}
+</form>
+
+{% endblock %}

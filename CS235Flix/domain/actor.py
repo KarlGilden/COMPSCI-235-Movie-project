@@ -15,13 +15,13 @@ class Actor:
         return f"<Actor {self.__actor_full_name}>"
 
     def __eq__(self, other):
-        if self.__actor_full_name == other.__actor_full_name:
+        if self.__actor_full_name.lower() == other.__actor_full_name.lower():
             return True
         else:
             return False
 
     def __lt__(self, other):
-        return self.__actor_full_name < other.__actor_full_name
+        return self.__actor_full_name.lower() < other.__actor_full_name.lower()
 
     def __hash__(self):
         return hash(self.__actor_full_name)

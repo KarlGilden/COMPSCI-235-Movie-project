@@ -13,13 +13,13 @@ class Genre:
         return f"<Genre {self.__genre_name}>"
 
     def __eq__(self, other):
-        if self.__genre_name == other.__genre_name:
+        if self.__genre_name.lower() == other.__genre_name.lower():
             return True
         else:
             return False
 
     def __lt__(self, other):
-        return self.__genre_name < other.__genre_name
+        return self.__genre_name.lower() < other.__genre_name.lower()
 
     def __hash__(self):
         return hash(self.__genre_name)

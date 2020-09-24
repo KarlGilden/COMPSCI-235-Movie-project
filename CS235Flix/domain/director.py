@@ -14,7 +14,7 @@ class Director:
         return f"<Director {self.__director_full_name}>"
 
     def __eq__(self, other):
-        if self.__director_full_name == other.__director_full_name:
+        if self.__director_full_name.lower() == other.__director_full_name.lower():
             return True
         else:
             return False

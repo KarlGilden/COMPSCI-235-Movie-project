@@ -2,15 +2,26 @@
 
 {% block body %}
 
-<div class="movies">
-    
-    {% for movie in movies %}
-        <div class="movie">
-            <div class="movie-img"></div>
-            <p class="movie-name">{{ movie.title }} &lt;{{ movie.release_year }}&gt;</p>
-        </div>
-    {% endfor %}
+<div class="browse-container">
+    <form class="form" action="/browse" method="get">
+        {{ form.search(class_="form-control") }}
+        {{ form.csrf_token }}
+        <input class="submit" type="submit" value="Submit">
+    </form>
 
+    <p>Results for {{ search_query }}</p>
+
+    <div class="movies">
+    
+        {% for movie in movies %}
+            <a class="movie" href="{{ url_for('movies_bp.view_movie', movie_id=movie.id) }} ">
+                <div class="movie-img"></div>
+                <p class="movie-name">{{ movie.title }} &lt;{{ movie.release_year }}&gt;</p>
+            </a>
+        {% endfor %}
+    
+    </div>
 </div>
+
 
 {% endblock %}

@@ -26,9 +26,13 @@ class MovieFileCSVReader:
                 release_year = int(row['Year'])
                 rating = float(row['Rating'])
                 runtime = int(row['Runtime (Minutes)'])
+                id = int(row['Rank'])
+                description = row['Description']
                 movie = Movie(title, release_year)
                 movie.rating = rating
                 movie.runtime_minutes = runtime
+                movie.id = id
+                movie.description = description
                 genres_str = row['Genre']
                 genres = genres_str.split(',')
 
@@ -54,7 +58,7 @@ class MovieFileCSVReader:
 
                 for g in genres:
                     if g not in movie.genres:
-                        movie.add_genre(a)
+                        movie.add_genre(g)
                     self._dataset_of_genres.add(Genre(g))
                 
                 for s in subtitles:

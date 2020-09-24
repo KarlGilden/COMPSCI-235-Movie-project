@@ -2,9 +2,24 @@
 
 {% block body %}
 
-<div class="content">
-    <h1>Welcome,</h1>
-    <p>Enjoy all of you favourite movies or try something new</p>
+<div class="container">
+    <div class="content">
+        <h1>Welcome, {% if 'username' in session %} {{ session['username'] }} {% endif %} </h1>
+        <p>Enjoy all of you favourite movies or try something new</p>
+    </div>
+    <div class="top-picks-container">
+        <h2>Top picks by our users:</h2>
+        <div class="top-picks">
+            {% for movie in movies[:5] %}
+            <a class="top-pick movie" href="{{ url_for('movies_bp.view_movie', movie_id=movie.id) }}">
+                <div class="movie-img"></div>
+                <p class="movie-name">{{ movie.title }} &lt;{{ movie.release_year }}&gt;</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    
 </div>
+
 
 {% endblock %}

@@ -11,19 +11,35 @@
 
 .menu{
     display: flex;
+    background-color: black;
+    padding: 15px 10%;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 100px;
+    top: 0;
+    margin-bottom: 25px;
+}
+
+.menu div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
 }
 
 .menu p{
-    float: left;
-    padding: 0 10px;
+    padding: 0 20px;
+}
+
+.menu p a:hover{
+    color: rgb(165, 0, 0);
+}
+
+.menu h1 a:hover{
+    color: rgb(165, 0, 0);
 }
 
 body{
     background-color: #222;
-    padding: 30px 10%;
     color: white;
 }
 
@@ -42,7 +58,7 @@ h1.title{
     grid-column-gap: 20px;
     grid-row-gap: 2em;
     height: fit-content;
-    grid-template-columns: repeat(5, 200px);
+    grid-template-columns: repeat(4, 250px);
     grid-auto-rows: 200px;
 }
 
@@ -52,7 +68,7 @@ h1.title{
 
 .movie-img{
     background-color: #111;
-    height: 90%;
+    height: 80%;
     width: 100%;
 }
 
@@ -61,8 +77,9 @@ h1.title{
 }
 
 .content{
-    width: 100%;
+    width: 25%;
     height: 100%;
+    margin-bottom: 100px;
     padding: 10px;
 }
 
@@ -72,4 +89,141 @@ h1.title{
 
 .content p{
     margin-top: 20px;
+}
+
+.movie-container{
+    display: flex;
+    justify-content: space-between;
+    height: 50vh;
+    width: 100%;
+}
+
+.movie-info{
+    float: left;
+    width: 50%;
+}
+
+.movieimg{
+    height: 100%;
+    width: 50%;
+    margin-left: 10px;
+    background-color: #111;
+    float: right;
+}
+
+.movie-specs{
+    margin-top: 20px;
+}
+
+.top-picks{
+    margin: auto;
+    display: flex;
+    width: fit-content;
+    background-color: #333;
+    padding: 10px;
+}
+
+.top-pick{
+    height: 150px;
+    margin: 20px;
+    width: 200px;
+    background-color: #111;
+}
+
+.top-picks-container{
+    text-align: center;
+
+}
+
+.content-container{
+    padding: 30px 10%;
+
+}
+
+.movie:hover p{
+    color: rgb(165, 0, 0);
+}
+
+.form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-control{
+    width: 100%;
+    padding: 7px;
+    border-radius: 0px;
+    background-color: #111;
+    border: none;
+    font-size: 1em;
+}
+
+.form-control:focus{
+    background-color: #333;
+}
+
+.submit{
+    font-size: 0.75em;
+    border: none;
+    border-left: 1px solid rgb(165, 0, 0);
+    border-radius: 1px;
+    background-color: rgb(165, 0, 0);
+    padding: 10px;
+    color: white;
+}
+
+.browse-container{
+    width: fit-content;
+    margin: auto;
+}
+
+ul{
+    list-style-type: none;
+}
+.form-field input{
+    width: 50%;
+    padding: 7px;
+    border-radius: 0px;
+    background-color: #111;
+    border: none;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #222;
+    font-size: 1em;
+
+}
+
+.reviews-grid{
+    display: grid;
+    grid-template-columns: auto;
+
+}
+
+.review{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    min-height: 150px;
+    background-color: #333;
+}
+
+.review:nth-child(odd){
+    background-color: #111;
+    
+}
+
+.review-title{
+    display: flex;
+    align-items: baseline;
+}
+
+.review-title p{
+    font-size: 0.75em;
+    margin-right:5px;
+}
+
+.review-footer p{
+    font-size: 0.75em;
 }

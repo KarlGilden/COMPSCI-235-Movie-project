@@ -1,12 +1,13 @@
 from datetime import datetime
 
-from .movie import Movie
 
 class Review:
-    def __init__(self, movie: Movie, review_text: str, rating: int):
+    def __init__(self, movie, review_text: str, rating: int, user):
         self.__movie = movie
+        self.__user = user
         self.__review_text = review_text
-        self.__timestamp = datetime.now()
+        self.__timestamp = datetime.now().date()
+        self.__timestamp_time = datetime.now().time()
         if rating >= 1 and rating <=10:
             self.__rating = rating
         else:
@@ -37,6 +38,14 @@ class Review:
     def timestamp(self):
         return self.__timestamp
 
+    @property
+    def timestamp_time(self):
+        return self.__timestamp_time
+
+    @property
+    def user(self):
+        return self.__user
+
     @movie.setter
     def movie(self, movie):
         self.__movie = movie
@@ -52,3 +61,7 @@ class Review:
     @timestamp.setter
     def timestamp(self, timestamp):
         self.__timestamp = timestamp
+
+    @timestamp_time.setter
+    def timestamp_time(self, timestamp):
+        self.__timestamp_time = timestamp

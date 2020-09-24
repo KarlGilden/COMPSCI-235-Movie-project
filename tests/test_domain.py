@@ -3,7 +3,10 @@ from CS235Flix.domain.actor import Actor
 from CS235Flix.domain.director import Director
 from CS235Flix.domain.genre import Genre
 from CS235Flix.domain.subtitle import Subtitle
-from CS235Flix.domain.user import Movie, Review, User
+from CS235Flix.domain.movie import Movie
+from CS235Flix.domain.review import Review
+from CS235Flix.domain.user import User
+
 
 @pytest.fixture
 def movie():
@@ -25,7 +28,7 @@ def director():
 def subtitle():
     return Subtitle("  English", "Good morning")
 
-
+# test construtors for all domain classes
 def test_constructors(movie, genre, director, subtitle):
     assert movie.title == "Jaws"
     assert movie.release_year == 1994
@@ -34,6 +37,19 @@ def test_constructors(movie, genre, director, subtitle):
     assert subtitle._language == "english" 
     assert subtitle._transcript == "Good morning"
 
+# test movie class
+
+# test actor class
+
+# test genre class
+
+# test director class
+
+# test review class
+
+# test user class
+
+# test subtitle class
 def test_add_to_movie(subtitle):
     movie = Movie("Jaws", 1975)
     assert len(movie.subtitles) == 0

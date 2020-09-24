@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="movie-container">
+    <div class="movie-info">
+        <div class="movie-head">
+            <h1>{{ movie.title }}</h1>
+            <h3>{{ movie.release_year }}    </h3><h4>{{ movie.runtime_minutes }} minutes</h4>
+            <br>
+            <p style="font-size: 1.25em;">{{ movie.description }}</p>
+        </div>
+        <div class="movie-specs">
+            <p>Director: {{ movie.director }} </p>
+            <p>Genres: {{ genres }}</p>
+            <p>Actors: {{ actors }}</p>
+            <p>Rating: {{ movie.rating }}</p>
+        </div>
+
+        
+    </div>
+    <div class="movieimg">
+
+    </div>
+</div>
+<div class="reviews">
+
+    <h2>Reviews</h2>
+    <hr>
+
+    <div class="reviews-grid">
+        {% for review in movie.reviews %}
+        <div class="review">
+
+            <div class="review-title">
+                <p>from</p>
+                <h2>{{ review.user }}</h2>
+            </div>
+            
+            <div class="review-body">
+                <p>{{ review.review_text}}</p>
+            </div>
+            
+
+            <div class="review-footer">
+                <p>posted on {{ review.timestamp }} at {{ review.timestamp_time }}</p>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+    
+    <button class="submit" onclick="location.href='{{ review_url }}'">Add Review</button>
+
+</div>
+
+{% endblock %}
