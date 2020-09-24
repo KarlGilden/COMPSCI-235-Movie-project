@@ -144,7 +144,7 @@ h1.title{
     color: rgb(165, 0, 0);
 }
 
-.form{
+.search-form{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -237,4 +237,23 @@ ul{
 }
 .custom-select select option{
     color: #111;
+}
+
+.search-form{
+    margin-bottom: 10px;
+}
+
+.search-settings{
+    margin-bottom: 10px;
+}
+
+.search-settings ul{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+}
+
+li{
+    float: left;
+    margin-right: 20px;
 }

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, Flask, request, url_for, session, redirect
 import CS235Flix.adapters.repository as repo
 from flask_wtf import FlaskForm
-from wtforms import StringField, HiddenField, TextAreaField, SubmitField, SelectField
+from wtforms import StringField, HiddenField, TextAreaField, SubmitField, SelectField, BooleanField, RadioField
 import CS235Flix.utilities.utils as utilities 
 import CS235Flix.movies.services as services
 from CS235Flix.authentication.authentication import login_required
@@ -17,19 +17,21 @@ def browse():
     form = SearchForm()
     movies_dict = services.get_movie_ids(repo.repo_instance)
     search_query = request.args.get('search')
-        
-    if search_query:
-        movies = services.get_movies_by_search(search_query, repo.repo_instance)
-    else:
-        movies = services.get_latest_movies(repo.repo_instance)
-        search_query = 'latest movies'
+    setting = request.args.get('search_settings')
+    
+    if form.is_submitted:
+        if search_query == None and setting == None:
+            setting = 'most recent'
+        movies = services.get_movies_by_search(search_query, setting, repo.repo_instance)
 
     return render_template(
         'browse_movies.html',
         movies=movies,
         form=form,
+        type=type(movies) == list,
         search_query=search_query,
-        movies_ids = movies_dict
+        movies_ids = movies_dict,
+        setting=setting
     )
 
 
@@ -54,7 +56,6 @@ def add_review():
     form = ReviewForm()
     movie_id = int(request.args.get('movie_id'))
     if form.is_submitted():
-        print(movie_id)
         movie = services.get_movie_by_id(movie_id, repo.repo_instance)
         services.create_review(movie, form.review.data, form.rating.data, username)
         url = url_for('movies_bp.view_movie', movie_id=movie_id)
@@ -69,6 +70,7 @@ def add_review():
     
 
 class SearchForm(FlaskForm):
+    search_settings = RadioField('radio', choices=[('A-Z', 'A-Z'), ('most recent', 'Most recent'), ('oldest', 'Oldest')])
     search = StringField('search', _name='search', render_kw={"placeholder": "Search..."})
 
 class ReviewForm(FlaskForm):

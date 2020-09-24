@@ -39,41 +39,56 @@ class MemoryRepository(AbstractRepository):
             self.__movies.append(movie)
 
     def get_movie(self, movie:Movie):
-        index = self.__movies.index(movie)
-        return self.__movies[index]
+        try:
+            index = self.__movies.index(movie)
+            return self.__movies[index]
+        except:
+            return None
 
     def add_actor(self, actor:Actor):
         if actor not in self.__actors:
             self.__actors.append(actor)
 
     def get_actor(self, actor:Actor):
-        index = self.__actors.index(actor)
-        return self.__actors[index]
+        try:
+            index = self.__actors.index(actor)
+            return self.__actors[index]
+        except:
+            return None
 
     def add_review(self, review:Review):
         if review not in self.__reviews:
             self.__reviews.append(review)
 
     def get_review(self, review:Review):
-        index = self.__reviews.index(review)
-        return self.__reviews[index]
+        try:
+            index = self.__reviews.index(review)
+            return self.__reviews[index]
+        except:
+            return None
 
     def add_director(self, director:Director):
         if director not in self.__directors:
             self.__directors.append(director)
 
     def get_director(self, director:Director):
-        index = self.__directors.index(director)
-        return self.__directors[index]
+        try:
+            index = self.__directors.index(director)
+            return self.__directors[index]
+        except:
+            return None
 
     def add_genre(self, genre:Genre):
         if genre not in self.__genres:
             self.__genres.append(genre)
 
     def get_genre(self, genre:Genre):
-        index = self.__genres.index(genre)
-        return self.__genres[index]
-
+        try:
+            index = self.__genres.index(genre)
+            return self.__genres[index]
+        except:
+            return None
+            
     def get_number_of_movies(self):
         return len(self.__movies)
 
@@ -123,6 +138,18 @@ class MemoryRepository(AbstractRepository):
 
     def get_latest_movies(self):
         return sorted(self.__movies, key=lambda movie: movie.release_year, reverse=True)
+
+    def get_all_movies(self):
+        return self.__movies
+
+    def get_all_actors(self):
+        return self.__actors
+
+    def get_all_genres(self):
+        return self.__genres
+
+    def get_all_directors(self):
+        return self.__directors
 
     def create_movie_ids(self):
         for movie in self.__movies:

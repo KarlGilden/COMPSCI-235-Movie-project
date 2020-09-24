@@ -1,6 +1,9 @@
 from CS235Flix.adapters.repository import AbstractRepository
 from CS235Flix.domain.review import Review
 from CS235Flix.domain.movie import Movie
+from CS235Flix.domain.actor import Actor
+from CS235Flix.domain.director import Director
+from CS235Flix.domain.genre import Genre
 
 def get_movie(movie, repo):
     movie = repo.get_movie(movie)
@@ -53,10 +56,82 @@ def get_latest_movies(repo):
     movies = repo.get_latest_movies()
     return movies
 
-def get_movies_by_search(search, repo):
-    movies = set()
-    movies_by_actor = set(sorted(get_movies_by_actor(search, repo)))
-    movies_by_director = set(sorted(get_movies_by_director(search, repo)))
-    movies_by_genre = set(sorted(get_movies_by_genre(search, repo)))
-    movies = movies.union(movies_by_actor).union(movies_by_director).union(movies_by_genre)
-    return list(movies)
+def get_movies_by_search(search, setting, repo):
+    if search == None:
+        search = ''
+    movies = repo.get_all_movies()
+    """ 
+    # get movies by genre
+    if repo.get_genre(Genre(search)):
+        if setting == 'alpha':
+            return sorted(repo.get_movies_by_genre(search))
+        elif setting == 'most_recent':
+            return sorted(repo.get_movies_by_genre(search), key=lambda movie: movie.release_year, reverse=True)
+        elif setting == 'oldest':
+            return sorted(repo.get_movies_by_genre(search), key=lambda movie: movie.release_year, reverse=False)
+        else:
+            return repo.get_movies_by_genre(search)
+
+    # get movie by actors and directors
+    elif repo.get_actor(Actor(search)) and repo.get_director(Director(search)):
+        if setting == 'alpha':
+            return sorted(repo.get_movies_by_actor(search)) + sorted(repo.get_movies_by_director(search))
+        elif setting == 'most_recent':
+            return sorted(repo.get_movies_by_actor(search),key=lambda movie: movie.release_year, reverse=True) + sorted(repo.get_movies_by_director(search), key=lambda movie: movie.release_year, reverse=True)
+        elif setting == 'oldest':
+            return sorted(repo.get_movies_by_actor(search),key=lambda movie: movie.release_year, reverse=False) + sorted(repo.get_movies_by_director(search), key=lambda movie: movie.release_year, reverse=False)
+        else:
+            repo.get_movies_by_actor(search) + repo.get_movies_by_director(search)
+
+    # get movie by actors
+    elif repo.get_actor(Actor(search)):
+        if setting == 'alpha':
+            return sorted(repo.get_movies_by_actor(search))
+        elif setting == 'most_recent':
+            return sorted(repo.get_movies_by_actor(search), key=lambda movie: movie.release_year, reverse=True)
+        elif setting == 'oldest':
+            return sorted(repo.get_movies_by_actor(search), key=lambda movie: movie.release_year, reverse=False)
+        else:
+            return repo.get_movies_by_actor(search)
+
+    # get movie by director
+    elif repo.get_director(Director(search)):
+        if setting == 'alpha':
+            return sorted(repo.get_movies_by_director(search))
+        elif setting == 'most_recent':
+            return sorted(repo.get_movies_by_director(search), key=lambda movie: movie.release_year, reverse=True)
+        elif setting == 'oldest':
+            return sorted(repo.get_movies_by_director(search), key=lambda movie: movie.release_year, reverse=False)
+        else:
+            return repo.get_movies_by_director(search)
+    """
+    # get specific movie
+    for movie in movies:
+        if search == movie.title:
+            return [movie]
+    # get movies by genre
+    if repo.get_genre(Genre(search)):
+        movies = repo.get_movies_by_genre(search)   
+    # get movies by actor
+    elif repo.get_actor(Actor(search)):
+        movies = repo.get_movies_by_actor(search)
+    # get movies by director
+    elif repo.get_director(Director(search)):
+        movies = repo.get_movies_by_director(search)
+    # search could not be found
+    elif search != '':
+        return "No movies could be found, please check your spelling"
+
+    # sort alphabetically 
+    if setting == 'A-Z':
+        return sorted(movies)
+    # sort by most recent releases
+    elif setting == 'most recent':
+        return sorted(movies, key=lambda movie: movie.release_year, reverse=True)
+    # sort by oldest movies first
+    elif setting == 'oldest':
+        return sorted(movies, key=lambda movie: movie.release_year, reverse=False)
+    # sort in default order
+    else:
+        return movies
+    
