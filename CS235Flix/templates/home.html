@@ -12,7 +12,9 @@
         <div class="top-picks">
             {% for movie in movies[:5] %}
             <a class="top-pick movie" href="{{ url_for('movies_bp.view_movie', movie_id=movie.id) }}">
-                <div class="movie-img"></div>
+                <div class="movie-img">
+                    <img src="{{ movie.image_url }}" alt="Unable to load image">
+                </div>
                 <p class="movie-name">{{ movie.title }} &lt;{{ movie.release_year }}&gt;</p>
             </a>
             {% endfor %}

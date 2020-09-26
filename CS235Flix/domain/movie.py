@@ -25,7 +25,11 @@ class Movie:
         self.__runtime_minutes = 0
         self.__id = 0
         self.__description = str()
+        self.__image_url = 'https://images.complex.com/complex/images/c_fill,dpr_auto,f_auto,q_90,w_1400/fl_lossy,pg_1/isafrgpsgkzwyfxhlr4r/not-available-lead'
 
+    @property
+    def image_url(self):
+        return self.__image_url
 
     @property
     def title(self) -> str:
@@ -70,6 +74,10 @@ class Movie:
     @property
     def reviews(self):
         return self.__reviews
+
+    @image_url.setter
+    def image_url(self, url):
+        self.__image_url = url
 
     @title.setter
     def title(self, title):
