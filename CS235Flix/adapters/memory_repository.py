@@ -85,11 +85,17 @@ class MemoryRepository(AbstractRepository):
             self.__genres.append(genre)
 
     def get_genre(self, genre:Genre):
-        try:
-            index = self.__genres.index(genre)
-            return self.__genres[index]
-        except:
-            return None
+        if type(genre) == int:
+            try:
+                return self.__genres[genre]
+            except:
+                return None
+        else:
+            try:
+                index = self.__genres.index(genre)
+                return self.__genres[index]
+            except:
+                return None
             
     def get_number_of_movies(self):
         return len(self.__movies)

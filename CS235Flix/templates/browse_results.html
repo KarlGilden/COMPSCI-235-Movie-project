@@ -27,10 +27,20 @@
     {% endif %}
 </div>
 <div class="footer">
-    <ul>
+    <ul class="pagenums">
+        {% if page - 1 >= 0 %}
+        <a class="prevnext" href="{{ url_for('movies_bp.results', page=page - 1, setting=setting, search=search_query) }}">Prev</a>
+        {% endif %}
         {% for i in range(numpages) %}
-        <a href="{{ url_for('movies_bp.results', page=i, setting=setting, search=search_query) }}">{{ i + 1 }}</a>
+        {% if i == page %}
+        <a class="curr-pagenum" href="{{ url_for('movies_bp.results', page=i, setting=setting, search=search_query) }}">{{ i + 1 }}</a>
+        {% else %}
+        <a class="pagenum" href="{{ url_for('movies_bp.results', page=i, setting=setting, search=search_query) }}">{{ i + 1 }}</a>
+        {% endif %}
         {% endfor %}
+        {% if page + 1 < numpages %}
+        <a class="prevnext" href="{{ url_for('movies_bp.results', page=page + 1, setting=setting, search=search_query) }}">Next</a>
+        {% endif %}
     </ul>
     
 </div>

@@ -4,6 +4,7 @@ from CS235Flix.domain.movie import Movie
 from CS235Flix.domain.actor import Actor
 from CS235Flix.domain.director import Director
 from CS235Flix.domain.genre import Genre
+import random
 
 def get_movie(movie, repo):
     movie = repo.get_movie(movie)
@@ -87,6 +88,8 @@ def get_movies_by_search(search, setting, repo):
     # sort by oldest movies first
     elif setting == 'oldest':
         return sorted(movies, key=lambda movie: movie.release_year, reverse=False)
+    elif setting == 'rating':
+        return sorted(movies, key=lambda movie: movie.rating, reverse=True)
     # sort in default order
     else:
         return movies
@@ -95,3 +98,24 @@ def split_pages(movies, num_pages):
     for i in range(0, len(movies), num_pages):  
         yield movies[i:i + num_pages] 
     
+def create_browse_categories(repo):
+    categories = dict()
+    latest_movies = get_movies_by_search(None, 'most recent', repo)
+    top_rated_movies = get_movies_by_search(None, 'rating', repo)
+
+    rands = random.sample(range(0,len(repo.get_all_genres())), 3)
+    genre1 = repo.get_genre(rands[0]).genre_name
+    genre2 = repo.get_genre(rands[1]).genre_name
+    genre3 = repo.get_genre(rands[2]).genre_name
+
+    top_genre1 = get_movies_by_search(genre1, 'rating', repo)
+    top_genre2 = get_movies_by_search(genre2, 'rating', repo)
+    top_genre3 = get_movies_by_search(genre3, 'rating', repo)
+
+    categories[1] = [latest_movies, 'Latest movies']
+    categories[2] = [top_rated_movies, 'Top rated movies']
+    categories[3] = [top_genre1, genre1]
+    categories[4] = [top_genre2, genre2]
+    categories[5] = [top_genre3, genre3]
+
+    return categories

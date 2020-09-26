@@ -277,11 +277,38 @@ li{
 
 .footer{
     width: 100%;
-    height: 100px;
-    margin: 50px;
+    margin: auto;
     text-align: center;
 }
 
-.footer ul{
-    text-align: center;
+.pagenums{
+    margin: 50px;
+}
+
+.pagenum {
+    text-decoration-line: underline;
+    padding: 2px;
+}
+
+.pagenum:hover{
+    color: rgb(165, 0, 0);
+}
+
+.curr-pagenum{
+    font-size: 1em;
+    color: rgb(165, 0, 0);
+}
+
+.form{
+    margin-bottom: 50px;
+}
+
+.prevnext{
+    font-size: 1em;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: rgb(165, 0, 0);
+    padding: 10px;
+    color: white;
 }

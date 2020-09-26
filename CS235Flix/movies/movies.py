@@ -15,8 +15,8 @@ def browse():
     # define form
     form = SearchForm()
 
-    # set home browse page
-    movies = []
+    # set home browse page categories
+    categories = services.create_browse_categories(repo.repo_instance)
 
     # get list of movies to display according to settings and redirect to results page
     if request.method == 'POST':
@@ -27,9 +27,8 @@ def browse():
     # render page
     return render_template(
         'browse_movies.html',
-        movies=movies,
-        form=form,
-        type=type(movies) == list
+        categories=categories,
+        form=form
     )
 
 @movies_blueprint.route('/browse/results', methods=['GET', 'POST'])
