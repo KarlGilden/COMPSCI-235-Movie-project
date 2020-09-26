@@ -2,7 +2,7 @@
     <h1 class="title"><a href="/"><span style="color: rgb(165, 0, 0);">CS235</span>Flix</a></h1>
     <div>
         <p><a href="/">Home</a></p>
-        <p><a href="/browse">Browse Movies</a></p>
+        <p><a href="/movies/browse">Browse Movies</a></p>
         <p><a href="/authentication/login">Login</a></p>
         <p><a href="/authentication/register">Register</a></p>
         {% if 'username' in session %}<p style="font-size: 0.75em;"><a href="/authentication/logout">signout, {{ session['username'] }} </a></p> {% endif %}

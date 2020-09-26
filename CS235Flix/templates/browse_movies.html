@@ -4,7 +4,7 @@
 
 <div class="browse-container">
     <p style="font-size: 0.75em; color: grey; margin-bottom: 5px;">Search by:</p>
-    <form class="form" action="/browse" method="get">
+    <form class="form" action="/movies/browse" method="post">
         <div class="search-settings">
             {{ form.search_settings }}
         </div>
@@ -15,14 +15,7 @@
         
         <input class="submit" type="submit" value="Submit">
     </form>
-    {% if search_query == '' and setting != None %}
-    <p>Showing all movies ({{ setting }})</p>
-    {% elif search_query != None and setting != None %}
-    <p>Showing {{ setting }} movies for {{ search_query }}</p>
-    {% else %}
-    <p>Showing results for {{ search_query }}</p>
-    {% endif %}
-
+    
     {% if type %}
     <div class="movies">
     {% for movie in movies %}

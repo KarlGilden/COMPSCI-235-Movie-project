@@ -8,33 +8,50 @@ from CS235Flix.authentication.authentication import login_required
 from CS235Flix.domain.movie import Movie
 from wtforms.validators import DataRequired, Length, ValidationError
 
-movies_blueprint = Blueprint('movies_bp', __name__)
+movies_blueprint = Blueprint('movies_bp', __name__, url_prefix='/movies')
 
-
-@movies_blueprint.route('/browse', methods=['GET'])
+@movies_blueprint.route('/browse', methods=['GET', 'POST'])
 def browse():
     # define form
     form = SearchForm()
-    # get search settings
-    search_query = request.args.get('search')
-    setting = request.args.get('search_settings')
-    
-    # get list of movies to display according to settings
-    if form.validate_on_submit:
-        if search_query == None and setting == None:
-            setting = 'most recent'
-        movies = services.get_movies_by_search(search_query, setting, repo.repo_instance)
+
+    # set home browse page
+    movies = []
+
+    # get list of movies to display according to settings and redirect to results page
+    if request.method == 'POST':
+        setting = form.search_settings.data
+        search_query = form.search.data
+        return redirect(url_for('movies_bp.results', page=0, setting=setting, search=search_query))
 
     # render page
     return render_template(
         'browse_movies.html',
         movies=movies,
         form=form,
+        type=type(movies) == list
+    )
+
+@movies_blueprint.route('/browse/results', methods=['GET', 'POST'])
+def results():
+    search_query = request.args.get('search')
+    setting = request.args.get('setting')
+    page = int(request.args.get('page'))
+    
+    movies_per_page = 28
+    movies = services.get_movies_by_search(search_query, setting, repo.repo_instance)
+    numpages = len(movies) // movies_per_page
+    movies = list(services.split_pages(movies, movies_per_page))
+
+    return render_template(
+        'browse_results.html',
+        movies=movies,
         type=type(movies) == list,
+        page=page,
+        numpages=numpages,
         search_query=search_query,
         setting=setting
     )
-
 
 
 @movies_blueprint.route('/view-movie/<int:movie_id>', methods=['GET'])
