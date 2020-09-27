@@ -1,4 +1,5 @@
 from datetime import datetime
+from CS235Flix.domain.watchlist import WatchList
 
 class User:
     def __init__(self, user_name: str, password: str):
@@ -7,6 +8,7 @@ class User:
         self.__watched_movies = list()
         self.__reviews = list()
         self.__time_spent_watching_movies_minutes = 0
+        self.__watchlist = WatchList()
 
     @property
     def user_name(self):
@@ -19,6 +21,10 @@ class User:
     @property
     def watched_movies(self):
         return self.__watched_movies
+
+    @property
+    def watchlist(self):
+        return self.__watchlist
 
     @property
     def reviews(self):

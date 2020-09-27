@@ -312,3 +312,19 @@ li{
     padding: 10px;
     color: white;
 }
+
+.remove-watchlist{
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    color: rgb(165, 0, 0);
+    cursor: pointer;
+}
+
+.remove-watchlist:hover{
+    color: rgb(130, 0, 0);
+}
+ 
+.movie-box {
+    text-align: center;
+}

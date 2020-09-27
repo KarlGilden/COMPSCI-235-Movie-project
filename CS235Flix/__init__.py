@@ -24,4 +24,10 @@ def create_app(test_config=None):
         from .authentication import authentication
         app.register_blueprint(authentication.authentication_blueprint)
 
+        from .watchlist import watchlist
+        app.register_blueprint(watchlist.watchlist_blueprint)
+
+        from .utilities import utils
+        app.register_blueprint(utils.utilities_blueprint)
+        
     return app

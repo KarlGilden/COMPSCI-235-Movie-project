@@ -26,6 +26,8 @@
     <p>{{ movies }}</p>
     {% endif %}
 </div>
+
+
 <div class="footer">
     <ul class="pagenums">
         {% if page - 1 >= 0 %}
@@ -42,7 +44,6 @@
         <a class="prevnext" href="{{ url_for('movies_bp.results', page=page + 1, setting=setting, search=search_query) }}">Next</a>
         {% endif %}
     </ul>
-    
 </div>
 
 

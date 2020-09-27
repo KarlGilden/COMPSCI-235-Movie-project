@@ -2,7 +2,7 @@ from .movie import Movie
 
 class WatchList:
     def __init__(self):
-        self._movies = list()
+        self._movies = []
 
     @property
     def movies(self):
@@ -18,6 +18,7 @@ class WatchList:
     
     def remove_movie(self, movie: Movie):
         if movie in self._movies:
+            print('ho')
             self._movies.remove(movie)
 
     def select_movie_to_watch(self, index):

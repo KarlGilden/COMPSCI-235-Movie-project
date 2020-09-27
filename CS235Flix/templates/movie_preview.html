@@ -15,14 +15,24 @@
             <p>Genres: {{ genres }}</p>
             <p>Actors: {{ actors }}</p>
             <p>Rating: {{ movie.rating }}</p>
-        </div>
+        </div> 
+        <form class="form" method="POST">
+            {{ form.movie_id }}
+            {{ form.csrf_token }}
+            {% if in_watchlist %}
+            <input style="background-color: grey;" class="submit" type="button" value="In watchlist">
+            {% else %}
+            <input class="submit" type="submit" value="Add to watchlist">
+            {% endif %}
+        </form>
 
-        
     </div>
+
     <div class="movie-img-large">
         <img src="{{ movie.image_url }}" alt="Unable to load image">
     </div>
 </div>
+
 <div class="reviews">
 
     <h2>Reviews</h2>

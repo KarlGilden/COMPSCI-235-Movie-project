@@ -99,6 +99,7 @@ def split_pages(movies, num_pages):
         yield movies[i:i + num_pages] 
     
 def create_browse_categories(repo):
+
     categories = dict()
     latest_movies = get_movies_by_search(None, 'most recent', repo)
     top_rated_movies = get_movies_by_search(None, 'rating', repo)
@@ -119,3 +120,6 @@ def create_browse_categories(repo):
     categories[5] = [top_genre3, genre3]
 
     return categories
+
+def get_user(username, repo):
+    return repo.get_user(username)
