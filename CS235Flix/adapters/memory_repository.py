@@ -4,7 +4,6 @@ from CS235Flix.domain.movie import Movie
 from CS235Flix.domain.actor import Actor
 from CS235Flix.domain.director import Director
 from CS235Flix.domain.genre import Genre
-from CS235Flix.domain.subtitle import Subtitle
 from CS235Flix.domain.review import Review
 from CS235Flix.datafilereaders.movie_file_csv_reader import MovieFileCSVReader
 import CS235Flix.datafiles
@@ -23,7 +22,6 @@ class MemoryRepository(AbstractRepository):
         self.__actors = list()
         self.__directors = list()
         self.__users = list()
-        self.__subtitles = list()
 
 
     def add_user(self, user):

@@ -10,6 +10,10 @@ class Director:
     def director_full_name(self) -> str:
         return self.__director_full_name
 
+    @director_full_name.setter
+    def director_full_name(self, director):
+        self.__director_full_name = director
+
     def __repr__(self):
         return f"<Director {self.__director_full_name}>"
 
@@ -24,17 +28,3 @@ class Director:
 
     def __hash__(self):
         return hash(self.__director_full_name)
-
-
-class TestDirectorMethods:
-
-    def test_init(self):
-        director1 = Director("Taika Waititi")
-        assert repr(director1) == "<Director Taika Waititi>"
-        director2 = Director("")
-        assert director2.director_full_name is None
-        director3 = Director(42)
-        assert director3.director_full_name is None
-
-test1 = TestDirectorMethods()
-test1.test_init()

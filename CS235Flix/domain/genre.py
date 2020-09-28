@@ -9,6 +9,10 @@ class Genre:
     def genre_name(self) -> str:
         return self.__genre_name
 
+    @genre_name.setter
+    def genre_name(self, genre):
+        self.__genre_name = genre
+
     def __repr__(self):
         return f"<Genre {self.__genre_name}>"
 

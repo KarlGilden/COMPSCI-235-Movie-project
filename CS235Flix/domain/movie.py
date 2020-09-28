@@ -1,8 +1,6 @@
 from datetime import datetime
 from typing import List, Iterable
 
-
-
 class Movie:
     def __init__(self, title: str, release_year: int):
         if title == "" or type(title) is not str:
@@ -17,14 +15,12 @@ class Movie:
 
         self.__actors = list()
         self.__genres = list()
-        self.__subtitles = list()
         self.__reviews = list()
         self.__director = None
-        self.__description = None
+        self.__description = str()
         self.__rating = 0
         self.__runtime_minutes = 0
         self.__id = 0
-        self.__description = str()
         self.__image_url = 'https://images.complex.com/complex/images/c_fill,dpr_auto,f_auto,q_90,w_1400/fl_lossy,pg_1/isafrgpsgkzwyfxhlr4r/not-available-lead'
 
     @property
@@ -161,17 +157,10 @@ class Movie:
         if genre in self.__genres:
             self.__genres.remove(genre)
 
-    def add_subtitle(self, subtitle):
-        if subtitle in self.__subtitles:
-            self.__subtitles.remove(subtitle)
-            self.__subtitles.append(subtitle)
-        else:
-            self.__subtitles.append(subtitle)
-
-    def remove_subtitle(self, subtitle):
-        if subtitle in self.__subtitles:
-            self.__subtitles.remove(subtitle)
-
     def add_review(self, review):
         if review not in self.__reviews:
             self.__reviews.append(review)
+    
+    def remove_review(self, review):
+        if review in self.__reviews:
+            self.__reviews.remove(review)

@@ -46,6 +46,10 @@ class Review:
     def user(self):
         return self.__user
 
+    @user.setter
+    def user(self, user):
+        self.__user = user
+
     @movie.setter
     def movie(self, movie):
         self.__movie = movie

@@ -5,7 +5,6 @@ from CS235Flix.domain.movie import Movie
 from CS235Flix.domain.actor import Actor
 from CS235Flix.domain.director import Director
 from CS235Flix.domain.genre import Genre
-from CS235Flix.domain.subtitle import Subtitle
 from CS235Flix.domain.review import Review
 
 repo_instance = None
