@@ -195,9 +195,7 @@ h1.title{
     margin: auto;
 }
 
-ul{
-    list-style-type: none;
-}
+
 .form-field input{
     width: 50%;
     padding: 7px;

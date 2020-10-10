@@ -29,14 +29,12 @@ def add_user(username: str, password: str, repo: AbstractRepository):
     user = User(username, password_hash)
     repo.add_user(user)
 
-
 def get_user(username: str, repo: AbstractRepository):
     user = repo.get_user(username)
     if user is None:
         raise UnknownUserException
 
     return user_to_dict(user)
-
 
 def authenticate_user(username: str, password: str, repo: AbstractRepository):
     authenticated = False
@@ -46,12 +44,6 @@ def authenticate_user(username: str, password: str, repo: AbstractRepository):
         authenticated = check_password_hash(user.password, password)
     if not authenticated:
         raise AuthenticationException
-
-
-
-# ===================================================
-# Functions to convert model entities to dictionaries
-# ===================================================
 
 def user_to_dict(user: User):
     user_dict = {

@@ -187,7 +187,6 @@ def test_user_constructor(user):
     assert len(user.reviews) == 0
     assert user.time_spent_watching_movies_minutes == 0
     assert user.watchlist.size() == 0
-    assert user.watchlist == type(WatchList())
 
 def test_user_setter(user):
     user.user_name = 'Bart Simpson'

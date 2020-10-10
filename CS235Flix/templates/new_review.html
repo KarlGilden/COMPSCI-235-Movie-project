@@ -10,7 +10,13 @@
         <div class="custom-select">
            Rating: {{ form.rating }}
         </div>
-        
+        {% if form.review.errors %}
+        <ul class="errors">
+        {% for error in form.review.errors %}
+            <li>{{error}}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
     </div>
     {{ form.submit(class_="submit") }}
 </form>

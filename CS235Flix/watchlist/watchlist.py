@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, Flask, request, url_for, session, 
 import CS235Flix.adapters.repository as repo
 from flask_wtf import FlaskForm
 from wtforms import StringField, HiddenField, TextAreaField, SubmitField, SelectField, BooleanField, RadioField
-import CS235Flix.utilities.utils as utilities 
 import CS235Flix.movies.services as services
 import CS235Flix.watchlist.services as watchlist_services
 from CS235Flix.authentication.authentication import login_required

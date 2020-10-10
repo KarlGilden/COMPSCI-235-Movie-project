@@ -18,16 +18,16 @@ def create_review(movie, review_text, rating, user):
 def get_movie_by_id(id, repo):
     return repo.get_movie_by_id(id)
 
-def get_movie_ids(repo):
-    return repo.get_movie_ids()
+#def get_movie_ids(repo):
+ #   return repo.get_movie_ids()
 
 def add_review(review, repo):
     repo.add_review(review)
 
-def create_movie(movie_id, repo):
-    movie = repo.get_movie_ids()[movie_id]
-    movie = repo.get_movie(movie)
-    return movie
+#def create_movie(movie_id, repo):
+  #  movie = repo.get_movie_ids()[movie_id]
+  #  movie = repo.get_movie(movie)
+  #  return movie
 
 def get_movies_by_actor(actor, repo):
     movies = repo.get_movies_by_actor(actor)
@@ -44,14 +44,6 @@ def get_movies_by_director(director, repo):
 def get_movies_by_rating(repo):
     movies = repo.get_movies_by_rating()
     return movies
-
-def get_top_50(repo):
-    movies = get_movies_by_rating(repo)
-    return movies[:50]
-
-def get_top_20(repo):
-    movies = get_movies_by_rating(repo)
-    return movies[:20]
 
 def get_latest_movies(repo):
     movies = repo.get_latest_movies()

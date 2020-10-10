@@ -11,8 +11,11 @@ def create_app(test_config=None):
         # Load test configuration, and override any configuration settings.
         app.config.from_mapping(test_config)
         data_path = app.config['TEST_DATA_PATH']
+
+        
     repo.repo_instance = MemoryRepository()
     populate(data_path, repo.repo_instance)
+
     with app.app_context():
         # Register blueprints.
         from .home import home
@@ -27,7 +30,5 @@ def create_app(test_config=None):
         from .watchlist import watchlist
         app.register_blueprint(watchlist.watchlist_blueprint)
 
-        from .utilities import utils
-        app.register_blueprint(utils.utilities_blueprint)
         
     return app

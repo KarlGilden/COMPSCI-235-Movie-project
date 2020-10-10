@@ -39,44 +39,68 @@ class MemoryRepository(AbstractRepository):
             self.__movies.append(movie)
 
     def get_movie(self, movie:Movie):
-        try:
-            index = self.__movies.index(movie)
-            return self.__movies[index]
-        except:
-            return None
+        if type(movie) == int:
+            try:
+                return self.__movies[movie]
+            except:
+                return None
+        else:
+            try:
+                index = self.__movies.index(movie)
+                return self.__movies[index]
+            except:
+                return None
 
     def add_actor(self, actor:Actor):
         if actor not in self.__actors:
             self.__actors.append(actor)
 
     def get_actor(self, actor:Actor):
-        try:
-            index = self.__actors.index(actor)
-            return self.__actors[index]
-        except:
-            return None
+        if type(actor) == int:
+            try:
+                return self.__actors[actor]
+            except:
+                return None
+        else:
+            try:
+                index = self.__actors.index(actor)
+                return self.__actors[index]
+            except:
+                return None
 
     def add_review(self, review:Review):
         if review not in self.__reviews:
             self.__reviews.append(review)
 
     def get_review(self, review:Review):
-        try:
-            index = self.__reviews.index(review)
-            return self.__reviews[index]
-        except:
-            return None
+        if type(review) == int:
+            try:
+                return self.__reviews[review]
+            except:
+                return None
+        else:
+            try:
+                index = self.__reviews.index(review)
+                return self.__reviews[index]
+            except:
+                return None
 
     def add_director(self, director:Director):
         if director not in self.__directors:
             self.__directors.append(director)
 
     def get_director(self, director:Director):
-        try:
-            index = self.__directors.index(director)
-            return self.__directors[index]
-        except:
-            return None
+        if type(director) == int:
+            try:
+                return self.__directors[director]
+            except:
+                return None
+        else:
+            try:
+                index = self.__directors.index(director)
+                return self.__directors[index]
+            except:
+                return None
 
     def add_genre(self, genre:Genre):
         if genre not in self.__genres:
@@ -195,11 +219,10 @@ def load_directors(datapath, repo):
     for director in movie_file_reader.dataset_of_directors:
         repo.add_director(director)
 
-
-
-
 def populate(datapath, repo):
     load_movies(datapath, repo)
     load_genres(datapath, repo)
     load_actors(datapath, repo)
     load_directors(datapath, repo)
+    repo.add_user(User("fmercury", "mvNNbc1eLA$i"))
+    repo.add_user(User("thorke", "cLQ^C#oFXloS"))

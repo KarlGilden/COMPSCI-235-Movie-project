@@ -2,10 +2,10 @@ from flask import Blueprint, render_template, Flask, request, url_for, session, 
 import CS235Flix.adapters.repository as repo
 from flask_wtf import FlaskForm
 from wtforms import StringField, HiddenField, TextAreaField, SubmitField, SelectField, BooleanField, RadioField
-import CS235Flix.utilities.utils as utilities 
 import CS235Flix.movies.services as services
 from CS235Flix.authentication.authentication import login_required
 from CS235Flix.domain.movie import Movie
+from better_profanity import profanity
 from wtforms.validators import DataRequired, Length, ValidationError
 
 movies_blueprint = Blueprint('movies_bp', __name__, url_prefix='/movies')
@@ -67,7 +67,7 @@ def results():
 def view_movie(movie_id):
     form = WatchlistForm()
     # get movie to display by id
-    movie = services.create_movie(movie_id, repo.repo_instance)
+    movie = services.get_movie_by_id(movie_id, repo.repo_instance)
     in_watchlist = False
     try:
         user = session['username']
@@ -122,7 +122,7 @@ def add_review():
     movie_id = int(request.args.get('movie_id'))
 
     # create review from review form and redirect to movie page
-    if form.is_submitted():
+    if form.validate_on_submit():
         movie = services.get_movie_by_id(movie_id, repo.repo_instance) # get movie by id
         services.create_review(movie, form.review.data, form.rating.data, username) # create review
         return redirect(url_for('movies_bp.view_movie', movie_id=movie_id)) # redirect to movie page
@@ -134,7 +134,16 @@ def add_review():
         movie=services.get_movie_by_id(movie_id, repo.repo_instance)
     )
 
-    
+class ProfanityFree:
+    def __init__(self, message=None):
+        if not message:
+            message = u'Field must not contain profanity'
+        self.message = message
+
+    def __call__(self, form, field):
+        if profanity.contains_profanity(field.data):
+            raise ValidationError(self.message)
+
 # form definitions 
 class SearchForm(FlaskForm):
     search_settings = RadioField('radio', choices=[('A-Z', 'A-Z'), ('most recent', 'Most recent'), ('oldest', 'Oldest')])
@@ -145,7 +154,10 @@ class SearchForm(FlaskForm):
         )
 
 class ReviewForm(FlaskForm):
-    review = TextAreaField('review', _name='review', render_kw={"placeholder": "Write your review here..."})
+    review = TextAreaField('review', [
+        DataRequired(),
+        Length(min=4, message='Your comment is too short'),
+        ProfanityFree(message='Your comment must not contain profanity')])
     movie_id = HiddenField('movie_id')
     rating = SelectField('rating', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], coerce=int)
     submit = SubmitField('Submit')

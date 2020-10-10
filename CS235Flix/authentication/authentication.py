@@ -8,13 +8,11 @@ from password_validator import PasswordValidator
 
 from functools import wraps
 
-import CS235Flix.utilities.utils as utilities
 import CS235Flix.authentication.services as services
 import CS235Flix.adapters.repository as repo
 
 # Configure Blueprint.
 authentication_blueprint = Blueprint('authentication_bp', __name__, url_prefix='/authentication')
-
 
 @authentication_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
@@ -29,6 +27,7 @@ def register():
 
             # All is well, redirect the user to the login page.
             return redirect(url_for('authentication_bp.login'))
+
         except services.NameNotUniqueException:
             username_not_unique = 'Your username is already taken - please supply another'
 
@@ -98,7 +97,7 @@ def login_required(view):
 class PasswordValid:
     def __init__(self, message=None):
         if not message:
-            message = u'Your password must be at least 8 characters, and contain an upper case letter, \
+            message = u'Your password must be at least 8 characters, and contain an upper case letter,\
             a lower case letter and a digit'
         self.message = message
 
@@ -122,6 +121,7 @@ class RegistrationForm(FlaskForm):
         DataRequired(message='Your password is required'),
         PasswordValid()],
         render_kw={"placeholder": "Password..."})
+
     submit = SubmitField('Register')
 
 
