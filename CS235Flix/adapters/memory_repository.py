@@ -7,6 +7,7 @@ from CS235Flix.domain.genre import Genre
 from CS235Flix.domain.review import Review
 from CS235Flix.datafilereaders.movie_file_csv_reader import MovieFileCSVReader
 import CS235Flix.datafiles
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
 
@@ -27,6 +28,14 @@ class MemoryRepository(AbstractRepository):
     def add_user(self, user):
         if user not in self.__users:
             self.__users.append(user)
+
+    def add_user2(self, username, password):
+    # Encrypt password so that the database doesn't store passwords 'in the clear'.
+        password_hash = generate_password_hash(password)
+
+    # Create and store the new User, with password encrypted.
+        user = User(username, password_hash)
+        self.__users.append(user)
 
     def get_user(self, username):
         for user in self.__users:
@@ -224,5 +233,5 @@ def populate(datapath, repo):
     load_genres(datapath, repo)
     load_actors(datapath, repo)
     load_directors(datapath, repo)
-    repo.add_user(User("fmercury", "mvNNbc1eLA$i"))
-    repo.add_user(User("thorke", "cLQ^C#oFXloS"))
+    repo.add_user2("fmercury", "mvNNbc1eLA$i")
+    repo.add_user2("thorke", "cLQ^C#oFXloS")

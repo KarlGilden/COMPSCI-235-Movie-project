@@ -1,7 +1,8 @@
-# COVID-19 Web Application
+# CS235Flix
 
 ## Description
 
+A movie browsing application which showcases use of the Flask framework.
 
 ## Installation
 
@@ -9,6 +10,7 @@
 
 ```shell
 $ cd CS235FlixSkeleton
+$ git checkout assignment-2
 $ py -3 -m venv venv
 $ venv\Scripts\activate
 $ pip install -r requirements.txt
@@ -29,7 +31,7 @@ $ flask run
 
 ## Configuration
 
-The *COMPSCI-235/.env* file contains variable settings. They are set with appropriate values.
+The *COMPSCI-235-Movie-project/.env* file contains variable settings. They are set with appropriate values.
 
 * `FLASK_APP`: Entry point of the application (should always be `wsgi.py`).
 * `FLASK_ENV`: The environment in which to run the application (either `development` or `production`).
@@ -40,6 +42,6 @@ The *COMPSCI-235/.env* file contains variable settings. They are set with approp
 
 ## Testing
 
-Testing requires that file *COMPSCI-235/tests/conftest.py* be edited to set the value of `TEST_DATA_PATH`. You should set this to the absolute path of the *COMPSCI-235/tests/data* directory. 
-
-You can then run tests from within PyCharm.
+````shell
+$ python -m pytest
+```` 

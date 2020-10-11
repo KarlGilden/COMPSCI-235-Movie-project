@@ -59,16 +59,14 @@ def login():
             # Initialise session and redirect the user to the home page.
             session.clear()
             session['username'] = user['username']
-            return redirect(url_for('home_bp.home'))
+            return redirect('/')
 
         except services.UnknownUserException:
             # Username not known to the system, set a suitable error message.
             username_not_recognised = 'Username not recognised - please supply another'
-
         except services.AuthenticationException:
             # Authentication failed, set a suitable error message.
             password_does_not_match_username = 'Password does not match supplied username - please check and try again'
-
     # For a GET or a failed POST, return the Login Web page.
     return render_template(
         'authentication.html',

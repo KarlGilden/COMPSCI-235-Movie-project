@@ -156,8 +156,8 @@ class SearchForm(FlaskForm):
 class ReviewForm(FlaskForm):
     review = TextAreaField('review', [
         DataRequired(),
-        Length(min=4, message='Your comment is too short'),
-        ProfanityFree(message='Your comment must not contain profanity')])
+        Length(min=4, message='Your review is too short'),
+        ProfanityFree(message='Your review must not contain profanity')])
     movie_id = HiddenField('movie_id')
     rating = SelectField('rating', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], coerce=int)
     submit = SubmitField('Submit')

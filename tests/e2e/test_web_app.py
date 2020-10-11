@@ -2,7 +2,6 @@ import pytest
 
 from flask import session
 
-
 def test_register(client):
     # Check that we retrieve the register page.
     response_code = client.get('/authentication/register').status_code
@@ -42,7 +41,6 @@ def test_login(client, auth):
 
     # Check that a successful login generates a redirect to the homepage.
     response = auth.login()
-    print(response.headers['Location'])
     assert response.headers['Location'] == 'http://localhost/'
 
     # Check that a session has been created for the logged-in user.
@@ -66,21 +64,3 @@ def test_index(client):
     response = client.get('/')
     assert response.status_code == 200
     assert b'Welcome' in response.data
-
-@pytest.mark.parametrize(('comment', 'messages'), (
-        ('Who thinks Trump is a fuckwit?', (b'Your comment must not contain profanity')),
-        ('Hey', (b'Your comment is too short')),
-        ('ass', (b'Your comment is too short', b'Your comment must not contain profanity')),
-))
-def test_review_with_invalid_input(client, auth, review, messages):
-    # Login a user.
-    auth.login()
-
-    # Attempt to comment on an article.
-    response = client.post(
-        '/add-review',
-        data={'review': review, 'movie_id': 2}
-    )
-    # Check that supplying invalid comment text generates appropriate error messages.
-    for message in messages:
-        assert message in response.data
